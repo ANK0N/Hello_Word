@@ -33,7 +33,7 @@ print(my_set.pop())  # 随机取出一个
 my_set.clear()
 print(my_set)  # set()  被清空为空集合了
 
-#
+
 #
 #
 # 两个集合的差集,返回出一个空集合 (集合1有 集合2没有 的)
