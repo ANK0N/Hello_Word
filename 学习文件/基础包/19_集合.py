@@ -62,5 +62,3 @@ print(f"两集合合并的结果为{my_set1.union(my_set2)}")
 # 可以直接循环列表来遍历
 for i in my_set1:
     print(i)
-
-print("数据新增测试")
