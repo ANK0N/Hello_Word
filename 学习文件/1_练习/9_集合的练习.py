@@ -6,3 +6,7 @@ my_set = set()
 for i in my_list:
     my_set.add(i)
 print(f"去重后的列表为{my_set}")
+
+
+
+
