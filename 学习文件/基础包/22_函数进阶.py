@@ -54,6 +54,7 @@ user_info1("aili", "20", "女孩")
 
 
 # 3. 可变参数  在调用时不确定会传入多少参数
+
 # 位置传递的不定长
 def user_info(*agrs):  # 默认为元组
     print(agrs)
@@ -63,11 +64,29 @@ user_info("TOM")  # ("TOM")的元组
 user_info("TOM", "18")
 
 
-# 关键字传递的不定长
+# 关键字传递的不定长 数量随意但是一定是KV型
 def user_info(**kwargs):  # 默认为元组
     print(kwargs)
 
 
-user_info(name="TOM",age="22")
+user_info(name="TOM", age="22")
 
-# 参数不定的
+print("____________________________匿名函数________________________________")
+
+
+# 匿名函数  函数也可以将自身传入函数内
+# 是计算逻辑的传递而不是数据的传递!!!!!!!!!!!!!!!
+
+def my_def(computer):
+    test_num = computer(1, 2)
+    print(test_num)
+
+
+""" 在函数中调用函数 """
+
+
+def computer(x, y):
+    return x + y
+
+
+my_def(computer)  # 在函数1中调用函数2来完成函数1中的计算
