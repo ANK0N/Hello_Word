@@ -14,7 +14,7 @@ a 追加 追加的内容会在原有内容后面写入,如果文件不存在则�
 2. 将文件写入到bull.txt.bak
 3. 将与文件内的状态为 "测试" 的数据丢弃
 """
-my_file = open("D:/python ankon/学习文件/1_练习/bull_python.txt", "r", encoding='utf-8')  # 读取文件
+my_file = open("/第一章/1_练习/bull_python.txt", "r", encoding='utf-8')  # 读取文件
 create_file = open('D:/ankon文件下载位置/bull_python.txt.bak', 'a', encoding='utf-8')  # 新建接收文件,且是追加模式
 for my_txt in my_file:
     my_txt = my_txt.replace('"', '').strip().split(" ")
