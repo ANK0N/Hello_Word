@@ -6,13 +6,13 @@ def code_test(address):
     # print(test.chaojiying.PostPic(im, 9501))  # 1902 验证码类型
 
     my_dict = test.chaojiying.PostPic(im, 9501)["pic_str"]
-    print(my_dict.split("|"))  # 打印列表
+    # print(my_dict.split("|"))  # 打印列表
 
     my_list = my_dict.split("|")
     str_of = ''
     for i in my_list:
         str_of += i[0]
-    print(f"坐标字符排序 : {str_of}")  # 打印字符
+    # print(f"坐标字符排序 : {str_of}")  # 打印字符
 
     import requests
     import json
@@ -29,7 +29,7 @@ def code_test(address):
     response = requests.post(url, headers=headers, data=json.dumps(payload))
     result = response.json()
 
-    print(f"排序结果 : {result['result']}")
+    # print(f"排序结果 : {result['result']}")
 
     str_in = result['result']
     str_yz = ''
