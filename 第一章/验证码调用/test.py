@@ -1,64 +1,24 @@
-import requests
-class Chaojiying_Client(object):
-
-    def __init__(self, username, password, soft_id):
-        self.username = username
-        password = password.encode('utf8')
-        self.password = md5(password).hexdigest()
-        self.soft_id = soft_id
-        self.base_params = {
-            'user': self.username,
-            'pass2': self.password,
-            'softid': self.soft_id,
-        }
-        self.headers = {
-            'Connection': 'Keep-Alive',
-            'User-Agent': 'Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 5.1; Trident/4.0)',
-        }
-
-    def PostPic(self, im, codetype):
-        """
-        im: 图片字节
-        codetype: 题目类型 参考 http://www.chaojiying.com/price.html
-        """
-        params = {
-            'codetype': codetype,
-        }
-        params.update(self.base_params)
-        files = {'userfile': ('ccc.jpg', im)}
-        r = requests.post('http://upload.chaojiying.net/Upload/Processing.php', data=params, files=files,
-                          headers=self.headers)
-        return r.json()
-
-    def PostPic_base64(self, base64_str, codetype):
-        """
-        im: 图片字节
-        codetype: 题目类型 参考 http://www.chaojiying.com/price.html
-        """
-        params = {
-            'codetype': codetype,
-            'file_base64': base64_str
-        }
-        params.update(self.base_params)
-        r = requests.post('http://upload.chaojiying.net/Upload/Processing.php', data=params, headers=self.headers)
-        return r.json()
-
-    def ReportError(self, im_id):
-        """
-        im_id:报错题目的图片ID
-        """
-        params = {
-            'id': im_id,
-        }
-        params.update(self.base_params)
-        r = requests.post('http://upload.chaojiying.net/Upload/ReportError.php', data=params, headers=self.headers)
-        return r.json()
-
-
-from hashlib import md5
-
-
-if __name__ == '__main__':
-    chaojiying = Chaojiying_Client('506036507', '506036507', '948744')  # 用户中心>>软件ID 生成一个替换 96001
-    im = open("C:\\Users\\ANKON\\Desktop\\my_png.png", 'rb').read()  # 本地图片文件路径 来替换 a.jpg 有时WIN系统须要//
-    print(chaojiying.PostPic(im, 9501))  # 1902 验证码类型
+from datetime import datetime, timedelta
+# 将传入的日期字符串转换为日期对象
+start_date = datetime.strptime("2023-07-01", '%Y-%m-%d')
+end_date = datetime.strptime("2023-07-10", '%Y-%m-%d')
+# 初始化一个空列表来存储日期范围
+date_list = []
+date_dict = {}
+current_date = start_date
+while current_date <= end_date:
+    date_list.append(current_date.strftime('%Y-%m-%d'))
+    current_date += timedelta(days=1)
+print(date_list)
+today_list = []
+for i in date_list:
+    date_date = datetime.strptime(i, '%Y-%m-%d')
+    today = date_date.strftime("%Y%m%d")
+    yesone_day = date_date - timedelta(days=1)
+    print (today,yesone_day)
+    yesone_day_1 = yesone_day.strftime(f"%Y%m%d")
+    yesone_day_2 = yesone_day.strftime(f"%Y-%m-%d")
+    # yesone_day_2 = yesone_day.strftime('%Y{y}%m{m}%d{d}').format(y='年', m='月', d='日')
+    date_dict [today] = [yesone_day_1,yesone_day_2]
+print (date_dict)
+# .append 追加

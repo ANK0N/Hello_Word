@@ -11,10 +11,11 @@ def decrypt(up_str, up_key):
         print("")
     scr_pas = up_str[:-9]
     src_len = len(scr_pas)
-    AKO_str = ''
+    AKO_list = []
     for i in range(0, src_len, 2):
-        AKO_char = int(scr_pas[i:i + 2], 16) ^ 0x10
-        AKO_str += chr(AKO_char)
+        my_char = int(scr_pas[i:i + 2], 16) ^ 0x10
+        AKO_list.append(my_char)
+    AKO_str = bytes(bytearray(AKO_list)).decode('utf8')
     return AKO_str
 
 
@@ -41,7 +42,7 @@ def up_defd(up_key, Client_ID, Client_Secret, url_add, url_id):
                 my_user = decrypt(response_in.json()['data']['user'], up_key)
                 my_password = decrypt(response_in.json()['data']['password'], up_key)
                 my_oss = response_in.json()['data']['ossPath']
-                return my_user, my_password, my_oss
+                return my_user, my_password, my_oss,response_in.json()
     # 多种异常返回,注意判断内容是否含有 Error
             else:
                 return 'Error:登录信息不存在,请检查ID'  # 末层异常,登录信息不存在,请检查ID
@@ -49,3 +50,8 @@ def up_defd(up_key, Client_ID, Client_Secret, url_add, url_id):
             return 'Error:', response_in.status_code  # 内层异常,加密信息获取失败
     else:
         return 'Error:', response.status_code, response.json()  # 外层异常,解密内容获取失败
+
+
+my_list = up_defd('lingshoutong','4566450985','IXNZpHgXbdbCGIff8viMpphntGFEvKPl','admin.pre.banmahui.cn','66')
+print(my_list)
+#print (f'账号为: {my_list[0]}\n密码为: {my_list[1]}\n文件位置: {my_list[2]}\n')

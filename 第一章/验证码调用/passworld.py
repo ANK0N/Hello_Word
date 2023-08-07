@@ -11,10 +11,11 @@ def decrypt(up_str, up_key):
         print("传入值异常")
     scr_pas = up_str[:-9]
     src_len = len(scr_pas)
-    AKO_str = ''
+    AKO_list = []
     for i in range(0, src_len, 2):
-        AKO_char = int(scr_pas[i:i + 2], 16) ^ 0x10
-        AKO_str += chr(AKO_char)
+        my_char = int(scr_pas[i:i + 2], 16) ^ 0x10
+        AKO_list.append(my_char)
+    AKO_str = bytes(bytearray(AKO_list)).decode('utf8')
     return AKO_str
 
 
@@ -22,8 +23,8 @@ def decrypt(up_str, up_key):
 def main(up_key):
     url = 'https://admin.yikuaigao.com/api/zhidou/access_token'
     data = {
-        'client_id': '5320410763',
-        'client_secret': 'XIdrjd0e3bzBrIe\/1xyDJpFYUoQPm2lB',
+        'client_id': '4566451002',
+        'client_secret': 'yMbZvHmw5JvrmQrLAOtgtadYAXmx3sS0',
         'grant_type': 'client_credentials',
     }
     response = requests.post(url, data=data)
@@ -32,7 +33,7 @@ def main(up_key):
         access_token = response.json().get('access_token')
     else:
         print('Error:', response.status_code, response.json())
-    url_1 = 'https://admin.yikuaigao.com/api/zhidou/customer/login?id=1'
+    url_1 = 'https://admin.yikuaigao.com/api/zhidou/customer/login?id=94'
     headers = {
         'Authorization': access_token}
     response = requests.get(url_1, headers=headers)
@@ -44,3 +45,5 @@ def main(up_key):
     my_password = decrypt(response.json()['data']['password'], up_key)
     my_oss = response.json()['data']['ossPath']
     return my_user, my_password, my_oss
+
+print(main('up_key'))
