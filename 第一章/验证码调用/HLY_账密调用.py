@@ -42,8 +42,8 @@ def up_defd(up_key, Client_ID, Client_Secret, url_add, url_id):
                 my_user = decrypt(response_in.json()['data']['user'], up_key)
                 my_password = decrypt(response_in.json()['data']['password'], up_key)
                 my_oss = response_in.json()['data']['ossPath']
-                return my_user, my_password, my_oss,response_in.json()
-    # 多种异常返回,注意判断内容是否含有 Error
+                return my_user, my_password, my_oss, response_in.json()
+            # 多种异常返回,注意判断内容是否含有 Error
             else:
                 return 'Error:登录信息不存在,请检查ID'  # 末层异常,登录信息不存在,请检查ID
         else:
@@ -52,6 +52,8 @@ def up_defd(up_key, Client_ID, Client_Secret, url_add, url_id):
         return 'Error:', response.status_code, response.json()  # 外层异常,解密内容获取失败
 
 
-my_list = up_defd('lingshoutong','4566450985','IXNZpHgXbdbCGIff8viMpphntGFEvKPl','admin.pre.banmahui.cn','66')
-print(my_list)
-#print (f'账号为: {my_list[0]}\n密码为: {my_list[1]}\n文件位置: {my_list[2]}\n')
+login_id = ''
+
+for i in range(18, 26):
+    my_list = up_defd('lingshoutong', '4566450961', 'PTyvVJRyON4m/PEeibLVA2lgr5VHXv+w', 'admin.banmahui.cn', i)
+    print(f'id: {i}\n账号为: {my_list[0]}\n密码为: {my_list[1]}\n')
